@@ -1,0 +1,4 @@
+fastapi
+wikipedia
+uvicorn
+llama-hub

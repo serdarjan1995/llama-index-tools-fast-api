@@ -1,0 +1,1 @@
+Create an Azure Cognitive Services API key at https://azure.microsoft.com/en-us/services/cognitive-services/translator/

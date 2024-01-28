@@ -1,0 +1,4 @@
+fastapi
+simple-salesforce
+uvicorn
+llama-hub

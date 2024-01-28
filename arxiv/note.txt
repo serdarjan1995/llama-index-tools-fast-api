@@ -1,0 +1,1 @@
+Create an API key that is expected to be sent with each request. The placeholder 'expected-api-key' in the code should be replaced with the actual API key.

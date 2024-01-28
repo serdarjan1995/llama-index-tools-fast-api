@@ -1,0 +1,4 @@
+fastapi
+llama-hub
+pydantic
+uvicorn

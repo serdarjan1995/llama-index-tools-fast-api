@@ -1,0 +1,2 @@
+Create an API key.
+Replace 'your_index_here' with the actual index instance of `BaseIndex` type within the `auto_retrieve` function.

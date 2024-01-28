@@ -1,0 +1,162 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "FastAPI",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/weather/today": {
+      "get": {
+        "tags": [
+          "Weather"
+        ],
+        "summary": "Get Current Weather At Location",
+        "description": "Fetches the current weather at the specified location using OpenWeatherMap API.\n\nParameters:\n- location: Name of the location (city, region)\n\nReturns:\n- WeatherReport: The current weather conditions at the specified location.",
+        "operationId": "get_weather_at_location_weather_today_get",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "location",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The name of the location to get the weather for.",
+              "title": "Location"
+            },
+            "description": "The name of the location to get the weather for."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/weather/tomorrow": {
+      "get": {
+        "tags": [
+          "Forecast"
+        ],
+        "summary": "Get Weather Forecast for Tomorrow at Location",
+        "description": "Fetches the weather forecast for tomorrow at the specified location using OpenWeatherMap API.\n\nParameters:\n- location: Name of the location (city, region)s\n\nReturns:\n- ForecastReport: The weather forecast for tomorrow at the specified location.",
+        "operationId": "get_forecast_tomorrow_at_location_weather_tomorrow_get",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "location",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The name of the location to get the forecast for.",
+              "title": "Location"
+            },
+            "description": "The name of the location to get the forecast for."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    },
+    "securitySchemes": {
+      "APIKeyHeader": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Api-key"
+      }
+    }
+  }
+}

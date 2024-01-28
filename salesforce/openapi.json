@@ -1,0 +1,160 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Salesforce API",
+    "description": "API for executing SOSL and SOQL queries in Salesforce.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/execute/": {
+      "post": {
+        "tags": [
+          "Salesforce"
+        ],
+        "summary": "Execute a query in Salesforce",
+        "operationId": "execute_execute__post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestData"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "QueryTypeEnum": {
+        "type": "string",
+        "enum": [
+          "sosl",
+          "soql"
+        ],
+        "title": "QueryTypeEnum"
+      },
+      "RequestData": {
+        "properties": {
+          "query": {
+            "type": "string",
+            "title": "Query",
+            "description": "SOSL query string."
+          },
+          "query_type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/QueryTypeEnum"
+              }
+            ],
+            "description": "Query Type",
+            "default": "sosl"
+          },
+          "username": {
+            "type": "string",
+            "title": "Username",
+            "description": "Salesforce username."
+          },
+          "password": {
+            "type": "string",
+            "title": "Password",
+            "description": "Salesforce password."
+          },
+          "consumer_key": {
+            "type": "string",
+            "title": "Consumer Key",
+            "description": "Salesforce consumer key."
+          },
+          "consumer_secret": {
+            "type": "string",
+            "title": "Consumer Secret",
+            "description": "Salesforce consumer secret."
+          },
+          "domain": {
+            "type": "string",
+            "title": "Domain",
+            "description": "Salesforce domain"
+          }
+        },
+        "type": "object",
+        "required": [
+          "query",
+          "username",
+          "password",
+          "consumer_key",
+          "consumer_secret",
+          "domain"
+        ],
+        "title": "RequestData"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

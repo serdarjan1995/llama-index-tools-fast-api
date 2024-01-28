@@ -1,0 +1,1 @@
+API key must be obtained from Salesforce and provided in the 'access_token' header for each request.

@@ -1,0 +1,144 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "ChatGPT Plugin API",
+    "description": "This API provides endpoints for interacting with ChatGPT plugins, allowing users to load OpenAPI specifications of plugins and get descriptions of these plugins.",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/load_openapi_spec": {
+      "get": {
+        "tags": [
+          "Plugin"
+        ],
+        "summary": "Load OpenAPI Spec of the Plugin",
+        "operationId": "load_openapi_spec_load_openapi_spec_get",
+        "parameters": [
+          {
+            "name": "manifest_url",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Manifest URL",
+              "description": "URL of the plugin manifest to load the OpenAPI specification from."
+            },
+            "description": "URL of the plugin manifest to load the OpenAPI specification from."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/describe_plugin": {
+      "get": {
+        "tags": [
+          "Plugin"
+        ],
+        "summary": "Describe the ChatGPT Plugin",
+        "operationId": "describe_plugin_describe_plugin_get",
+        "parameters": [
+          {
+            "name": "manifest_url",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Manifest URL",
+              "description": "URL of the plugin manifest to get the plugin description."
+            },
+            "description": "URL of the plugin manifest to get the plugin description."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

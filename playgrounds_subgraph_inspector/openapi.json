@@ -1,0 +1,158 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "FastAPI",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/introspect_and_summarize_subgraph": {
+      "post": {
+        "summary": "Introspect And Summarize Subgraph",
+        "description": "Introspect and summarize a subgraph schema from The Graph's decentralized network.",
+        "operationId": "introspect_and_summarize_subgraph_introspect_and_summarize_subgraph_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "QueryRequest": {
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "title": "Identifier",
+            "description": "Subgraph identifier or Deployment ID."
+          },
+          "use_deployment_id": {
+            "type": "boolean",
+            "title": "Use Deployment Id",
+            "description": "Flag to indicate if the identifier is a deployment ID. Default is False.",
+            "default": false
+          },
+          "query": {
+            "type": "string",
+            "title": "Query",
+            "description": "The GraphQL query string to execute."
+          },
+          "variables": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Variables",
+            "description": "Variables for the GraphQL query. Default is None."
+          },
+          "operation_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Operation Name",
+            "description": "Name of the operation, if multiple operations are present in the query. Default is None."
+          }
+        },
+        "type": "object",
+        "required": [
+          "identifier",
+          "query"
+        ],
+        "title": "QueryRequest"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    },
+    "securitySchemes": {
+      "APIKeyHeader": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Api-Key"
+      }
+    }
+  }
+}

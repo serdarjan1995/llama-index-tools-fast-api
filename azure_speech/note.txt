@@ -1,0 +1,1 @@
+An API Key for Azure Speech Services must be obtained by registering at https://azure.microsoft.com/en-us/services/cognitive-services/speech-to-text/

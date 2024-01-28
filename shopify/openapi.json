@@ -1,0 +1,128 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "FastAPI",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/query": {
+      "post": {
+        "summary": "Execute a GraphQL query on the Shopify Admin API",
+        "description": "- **query**: The GraphQL query string to be executed.",
+        "operationId": "run_graphql_query_query_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestData"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "RequestData": {
+        "properties": {
+          "shop_url": {
+            "type": "string",
+            "title": "Shop Url",
+            "description": "Shopify shop url"
+          },
+          "api_version": {
+            "type": "string",
+            "title": "Api Version",
+            "description": "Shopify api version to use"
+          },
+          "admin_api_key": {
+            "type": "string",
+            "title": "Admin Api Key",
+            "description": "Shopify admin api key"
+          },
+          "query": {
+            "type": "string",
+            "title": "Query",
+            "description": "GraphQL query to execute"
+          }
+        },
+        "type": "object",
+        "required": [
+          "shop_url",
+          "api_version",
+          "admin_api_key",
+          "query"
+        ],
+        "title": "RequestData"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

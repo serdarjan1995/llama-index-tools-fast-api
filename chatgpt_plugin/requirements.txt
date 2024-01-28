@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+requests
+pydantic
+llama-hub
+python-multipart
+PyYAML

@@ -1,0 +1,3 @@
+Creating an API key at the WAII service provider's website
+Activating database access with a database key from the WAII service provider
+Setting up the URL of the WAII service endpoint

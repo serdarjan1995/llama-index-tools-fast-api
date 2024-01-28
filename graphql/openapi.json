@@ -1,0 +1,129 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "FastAPI",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/graphql_request": {
+      "post": {
+        "summary": "Make a GraphQL query",
+        "description": "Make a GraphQL query against a server with the provided query, variables, and operation name.\n\n- **query**: The GraphQL query to execute\n- **variables**: The variable values for the query\n- **operation_name**: The name for the operation\n- **token**: The authorization token (if required for the endpoint)",
+        "operationId": "graphql_request_endpoint_graphql_request_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GraphQLQuery"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "GraphQLQuery": {
+        "properties": {
+          "query": {
+            "type": "string",
+            "title": "Query"
+          },
+          "variables": {
+            "type": "string",
+            "title": "Variables"
+          },
+          "operation_name": {
+            "type": "string",
+            "title": "Operation Name"
+          },
+          "headers": {
+            "type": "object",
+            "title": "Headers"
+          },
+          "url": {
+            "type": "string",
+            "title": "Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "query",
+          "variables",
+          "operation_name",
+          "headers",
+          "url"
+        ],
+        "title": "GraphQLQuery"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

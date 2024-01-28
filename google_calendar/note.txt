@@ -1,0 +1,4 @@
+The user must have a Google account
+The user must enable the Google Calendar API through their Google Developer Console
+The user must obtain API credentials (client_secrets.json file)
+The user must authenticate via OAuth2 to receive a token.json which is used to authenticate API calls

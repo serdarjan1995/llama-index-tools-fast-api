@@ -1,0 +1,171 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Zapier API",
+    "description": "API for interfacing with Zapier to execute actions and list available actions.",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/actions/list": {
+      "get": {
+        "tags": [
+          "Zapier"
+        ],
+        "summary": "List Available Zapier Actions",
+        "operationId": "list_zapier_actions_actions_list_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "oauth-token": []
+          }
+        ]
+      }
+    },
+    "/actions/execute/{action_id}": {
+      "post": {
+        "tags": [
+          "Zapier"
+        ],
+        "summary": "Execute a Zapier Action by ID",
+        "operationId": "execute_zapier_action_actions_execute__action_id__post",
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "oauth-token": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "action_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Action Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExecuteActionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ExecuteActionRequest": {
+        "properties": {
+          "instructions": {
+            "type": "string",
+            "title": "Instructions",
+            "description": "Natural language instructions for the action"
+          }
+        },
+        "type": "object",
+        "required": [
+          "instructions"
+        ],
+        "title": "ExecuteActionRequest"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    },
+    "securitySchemes": {
+      "api-key": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Api-key"
+      },
+      "oauth-token": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Oauth-Token"
+      }
+    }
+  }
+}

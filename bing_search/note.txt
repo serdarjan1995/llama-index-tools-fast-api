@@ -1,0 +1,1 @@
+You need to obtain an API key from the Bing Search Services at https://www.microsoft.com/en-us/bing/apis/bing-search-api-v7

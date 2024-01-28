@@ -1,0 +1,8 @@
+fastapi
+openai
+requests
+python-multipart
+uvicorn
+Pillow
+matplotlib
+llama-hub

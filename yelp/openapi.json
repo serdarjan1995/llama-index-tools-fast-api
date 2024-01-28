@@ -1,0 +1,212 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Yelp Business API",
+    "description": "API for searching businesses and fetching reviews using Yelp.",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/business/search": {
+      "post": {
+        "tags": [
+          "Business Search"
+        ],
+        "summary": "Search for businesses based on a query",
+        "operationId": "business_search_business_search_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "client-id": []
+          }
+        ]
+      }
+    },
+    "/business/reviews": {
+      "post": {
+        "tags": [
+          "Business Reviews"
+        ],
+        "summary": "Fetch reviews for a specific business by ID",
+        "operationId": "business_reviews_business_reviews_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReviewRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "client-id": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "ReviewRequest": {
+        "properties": {
+          "business_id": {
+            "type": "string",
+            "title": "Business Id",
+            "description": "The business ID obtained from search"
+          }
+        },
+        "type": "object",
+        "required": [
+          "business_id"
+        ],
+        "title": "ReviewRequest"
+      },
+      "SearchRequest": {
+        "properties": {
+          "query": {
+            "type": "string",
+            "title": "Query",
+            "description": "Search term or business name"
+          },
+          "location": {
+            "type": "string",
+            "title": "Location",
+            "description": "Location to search within"
+          },
+          "radius": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Radius",
+            "description": "Search radius in meters"
+          }
+        },
+        "type": "object",
+        "required": [
+          "query",
+          "location"
+        ],
+        "title": "SearchRequest"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    },
+    "securitySchemes": {
+      "api-key": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Api-key"
+      },
+      "client-id": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Client-Id"
+      }
+    }
+  }
+}

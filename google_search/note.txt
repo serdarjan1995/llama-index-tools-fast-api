@@ -1,0 +1,1 @@
+You must have a valid API key and search engine ID from Google Custom Search JSON API

@@ -1,0 +1,491 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "FastAPI",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/get_answer": {
+      "post": {
+        "summary": "Get the answer to a natural language query",
+        "description": "Generate a SQL query and run it against the database, returning the summarization of the answer.",
+        "operationId": "get_answer_get_answer_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AskRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "database-key": []
+          },
+          {
+            "waii-url": []
+          }
+        ]
+      }
+    },
+    "/describe_query": {
+      "post": {
+        "summary": "Describe the provided SQL query",
+        "description": "Describe a SQL query, returning the summarization of the answer.",
+        "operationId": "describe_query_describe_query_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DescribeQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "database-key": []
+          },
+          {
+            "waii-url": []
+          }
+        ]
+      }
+    },
+    "/diff_query": {
+      "post": {
+        "summary": "Diff two SQL queries",
+        "description": "Diff two SQL queries, returning the summarization of the answer.",
+        "operationId": "diff_query_diff_query_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiffQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "database-key": []
+          },
+          {
+            "waii-url": []
+          }
+        ]
+      }
+    },
+    "/describe_dataset": {
+      "post": {
+        "summary": "Describe a dataset with a natural language query",
+        "description": "Describe a dataset, potentially a table or schema, by answering a natural language question.",
+        "operationId": "describe_dataset_describe_dataset_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DescribeDatasetRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "database-key": []
+          },
+          {
+            "waii-url": []
+          }
+        ]
+      }
+    },
+    "/transcode": {
+      "post": {
+        "summary": "Transcode a SQL query from one dialect to another",
+        "description": "Transcode a SQL query from one dialect to another, based on the given instructions and target dialect.",
+        "operationId": "transcode_transcode_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TranscodeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "database-key": []
+          },
+          {
+            "waii-url": []
+          }
+        ]
+      }
+    },
+    "/get_semantic_contexts": {
+      "get": {
+        "summary": "Get all pre-defined semantic contexts",
+        "description": "Retrieve a list of all pre-defined semantic contexts.",
+        "operationId": "get_semantic_contexts_get_semantic_contexts_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api-key": []
+          },
+          {
+            "database-key": []
+          },
+          {
+            "waii-url": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AskRequest": {
+        "properties": {
+          "ask": {
+            "type": "string",
+            "title": "Ask",
+            "description": "A natural language question"
+          }
+        },
+        "type": "object",
+        "required": [
+          "ask"
+        ],
+        "title": "AskRequest"
+      },
+      "DescribeDatasetRequest": {
+        "properties": {
+          "ask": {
+            "type": "string",
+            "title": "Ask",
+            "description": "A natural language question on how to describe the dataset"
+          },
+          "schema_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Schema Name",
+            "description": "The schema name of the dataset to describe, excluding the database name"
+          },
+          "table_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Table Name",
+            "description": "The table name of the dataset to describe, excluding the schema name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "ask"
+        ],
+        "title": "DescribeDatasetRequest"
+      },
+      "DescribeQueryRequest": {
+        "properties": {
+          "query": {
+            "type": "string",
+            "title": "Query",
+            "description": "A SQL query"
+          },
+          "question": {
+            "type": "string",
+            "title": "Question",
+            "description": "A natural language question which the people want to ask."
+          }
+        },
+        "type": "object",
+        "required": [
+          "query",
+          "question"
+        ],
+        "title": "DescribeQueryRequest"
+      },
+      "DiffQueryRequest": {
+        "properties": {
+          "previous_query": {
+            "type": "string",
+            "title": "Previous Query",
+            "description": "The previous SQL query"
+          },
+          "current_query": {
+            "type": "string",
+            "title": "Current Query",
+            "description": "The current SQL query"
+          }
+        },
+        "type": "object",
+        "required": [
+          "previous_query",
+          "current_query"
+        ],
+        "title": "DiffQueryRequest"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "TranscodeRequest": {
+        "properties": {
+          "instruction": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Instruction",
+            "description": "Instruction in natural language",
+            "default": ""
+          },
+          "source_dialect": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Dialect",
+            "description": "Source dialect of the query"
+          },
+          "source_query": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Query",
+            "description": "The SQL query to transcode"
+          },
+          "target_dialect": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target Dialect",
+            "description": "The target dialect for the query"
+          }
+        },
+        "type": "object",
+        "title": "TranscodeRequest"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    },
+    "securitySchemes": {
+      "api-key": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Api-key"
+      },
+      "database-key": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Database-key"
+      },
+      "waii-url": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Waii-Url"
+      }
+    }
+  }
+}

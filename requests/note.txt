@@ -1,0 +1,2 @@
+The API key must be set to 'SECRET_API_KEY'. Replace 'SECRET_API_KEY' with your actual API key.
+User must set up domain headers appropriately in the code.

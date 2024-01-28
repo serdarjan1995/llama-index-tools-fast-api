@@ -1,0 +1,517 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Metaphor Search API",
+    "description": "This API provides a set of endpoints to interact with the Metaphor search system, allowing users to perform various types of internet searches.",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/search": {
+      "get": {
+        "tags": [
+          "Search"
+        ],
+        "summary": "Search the Internet with a natural language query",
+        "operationId": "search_search_get",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Natural language query string.",
+              "title": "Query"
+            },
+            "description": "Natural language query string."
+          },
+          {
+            "name": "num_results",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Number of results to return.",
+              "default": 10,
+              "title": "Num Results"
+            },
+            "description": "Number of results to return."
+          },
+          {
+            "name": "include_domains",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "List of top level domains to include in search.",
+              "title": "Include Domains"
+            },
+            "description": "List of top level domains to include in search."
+          },
+          {
+            "name": "exclude_domains",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "List of top level domains to exclude from search.",
+              "title": "Exclude Domains"
+            },
+            "description": "List of top level domains to exclude from search."
+          },
+          {
+            "name": "start_published_date",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Start date to filter results (YYYY-MM-DD).",
+              "title": "Start Published Date"
+            },
+            "description": "Start date to filter results (YYYY-MM-DD)."
+          },
+          {
+            "name": "end_published_date",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "End date to filter results (YYYY-MM-DD).",
+              "title": "End Published Date"
+            },
+            "description": "End date to filter results (YYYY-MM-DD)."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "title": "Response Search Search Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/find-similar": {
+      "get": {
+        "tags": [
+          "Search"
+        ],
+        "summary": "Find similar documents to a given URL",
+        "operationId": "find_similar_find_similar_get",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The web page URL to find similar results for.",
+              "title": "Url"
+            },
+            "description": "The web page URL to find similar results for."
+          },
+          {
+            "name": "num_results",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Number of results to return.",
+              "default": 3,
+              "title": "Num Results"
+            },
+            "description": "Number of results to return."
+          },
+          {
+            "name": "start_published_date",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Start date to filter results (YYYY-MM-DD).",
+              "title": "Start Published Date"
+            },
+            "description": "Start date to filter results (YYYY-MM-DD)."
+          },
+          {
+            "name": "end_published_date",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "End date to filter results (YYYY-MM-DD).",
+              "title": "End Published Date"
+            },
+            "description": "End date to filter results (YYYY-MM-DD)."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "title": "Response Find Similar Find Similar Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/retrieve_documents": {
+      "get": {
+        "tags": [
+          "Retrieve"
+        ],
+        "summary": "Retrieve documents by ids",
+        "operationId": "current_date_retrieve_documents_get",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of ids",
+              "title": "Query"
+            },
+            "description": "List of ids"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/search_and_retrieve": {
+      "get": {
+        "tags": [
+          "Search",
+          "Retrieve"
+        ],
+        "summary": "Search and retrieve documents with a natural language query",
+        "operationId": "search_and_retrieve_documents_search_and_retrieve_get",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Natural language query string.",
+              "title": "Query"
+            },
+            "description": "Natural language query string."
+          },
+          {
+            "name": "num_results",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Number of results to return.",
+              "default": 10,
+              "title": "Num Results"
+            },
+            "description": "Number of results to return."
+          },
+          {
+            "name": "include_domains",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "List of top level domains to include in search.",
+              "title": "Include Domains"
+            },
+            "description": "List of top level domains to include in search."
+          },
+          {
+            "name": "exclude_domains",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "List of top level domains to exclude from search.",
+              "title": "Exclude Domains"
+            },
+            "description": "List of top level domains to exclude from search."
+          },
+          {
+            "name": "start_published_date",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Start date to filter results (YYYY-MM-DD).",
+              "title": "Start Published Date"
+            },
+            "description": "Start date to filter results (YYYY-MM-DD)."
+          },
+          {
+            "name": "end_published_date",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "End date to filter results (YYYY-MM-DD).",
+              "title": "End Published Date"
+            },
+            "description": "End date to filter results (YYYY-MM-DD)."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "title": "Response Search And Retrieve Documents Search And Retrieve Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    },
+    "securitySchemes": {
+      "APIKeyHeader": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Api-Key"
+      }
+    }
+  }
+}

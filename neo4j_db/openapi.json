@@ -1,0 +1,174 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "FastAPI",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/query": {
+      "post": {
+        "summary": "Executes a Neo4j Cypher query based on user input",
+        "operationId": "Run_Cypher_Query_query_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Question"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {},
+                  "type": "array",
+                  "title": "Response Run Cypher Query Query Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "Question": {
+        "properties": {
+          "open_ai_key": {
+            "type": "string",
+            "title": "Open Ai Key",
+            "description": "OpenAI api key",
+            "default": "XXXX-XXXX"
+          },
+          "open_ai_model": {
+            "type": "string",
+            "title": "Open Ai Model",
+            "description": "OpenAI model name",
+            "default": "gpt-4"
+          },
+          "open_ai_temperature": {
+            "type": "integer",
+            "title": "Open Ai Temperature",
+            "description": "OpenAI temperature",
+            "default": 0
+          },
+          "neo4j_url": {
+            "type": "string",
+            "title": "Neo4J Url",
+            "description": "The connection string for the Neo4j database.",
+            "default": ""
+          },
+          "neo4j_user": {
+            "type": "string",
+            "title": "Neo4J User",
+            "description": "Username for the Neo4j database.",
+            "default": ""
+          },
+          "neo4j_password": {
+            "type": "string",
+            "title": "Neo4J Password",
+            "description": "Password for the Neo4j database.",
+            "default": ""
+          },
+          "neo4j_database": {
+            "type": "string",
+            "title": "Neo4J Database",
+            "description": "Neo4j database.",
+            "default": ""
+          },
+          "validate_cypher": {
+            "type": "boolean",
+            "title": "Validate Cypher",
+            "description": "Validate relationship directions in the generated Cypher statement. Default: False",
+            "default": false
+          },
+          "question": {
+            "type": "string",
+            "title": "Question",
+            "description": "The question to execute the Cypher query for."
+          },
+          "history": {
+            "anyOf": [
+              {
+                "items": {},
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "History",
+            "description": "A list of previous interactions for context. Defaults to None."
+          }
+        },
+        "type": "object",
+        "required": [
+          "question"
+        ],
+        "title": "Question"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

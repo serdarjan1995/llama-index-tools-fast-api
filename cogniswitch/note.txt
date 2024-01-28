@@ -1,0 +1,2 @@
+Create an API key at the Cogniswitch service platform.
+Make sure to set the 'OPENAI_API_KEY' environment variable with your OpenAI token.

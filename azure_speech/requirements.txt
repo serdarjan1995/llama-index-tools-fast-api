@@ -1,0 +1,4 @@
+fastapi
+azure-cognitiveservices-speech
+uvicorn
+llama-hub
